@@ -14,6 +14,10 @@
 </div>
 
 <script>
+    // THIS SHOULDNT BE USED ACCORDING TO SOLANGE
+    // WE MAKE A SCRIPTED API REQUEST AND MODIFY THE DOM
+    // BUT WE SHOULD USE SEPERATE CONTROLLERS WITH THYME ELEMENTS
+    // SO WE WILL DELETE THIS SOON
     function sendData() {
         const dataToSend = document.getElementById('sampleInput').value;
         axios.post('/api/test', { message: dataToSend })
