@@ -17,4 +17,9 @@ public class WebController {
     public String about() {
         return "about";
     }
+
+    @GetMapping("/comments")
+    public String comments() {
+        return "comments";
+    }
 }
