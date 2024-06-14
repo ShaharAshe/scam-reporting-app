@@ -1,25 +1,17 @@
 package hac.ex5.controller;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+@Configuration
+public class WebController implements WebMvcConfigurer {
 
-
-@Controller
-public class WebController {
-
-    @GetMapping("/")
-    public String home() {
-        return "index";
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/index").setViewName("index");
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/comments").setViewName("comments");
+        registry.addViewController("/about").setViewName("about");
     }
 
-    @GetMapping("/about")
-    public String about() {
-        return "about";
-    }
-
-    @GetMapping("/comments")
-    public String comments() {
-        return "comments";
-    }
 }

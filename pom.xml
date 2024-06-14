@@ -28,6 +28,10 @@
 
 
 
+
+
+
+
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-core</artifactId>
@@ -65,6 +69,14 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- ... other dependency elements ... -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+
+
+
+
 
         <!-- uncomment this if you are using h2 (in memory database) and comment out the dependency com.mysql above -->
         <!--        <dependency>-->
