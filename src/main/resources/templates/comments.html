@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html  lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Simple Axios Test</title>
     <!-- Include Axios from CDN for AJAX -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <div th:replace="common :: headerBootStrap"></div>
 </head>
 <body>
+
+<div th:replace="common :: headerNav"></div>
+
 <h1>Test Axios with Spring Boot</h1>
 <div>
     <label for="sampleInput">Enter your Name:</label>
@@ -31,5 +35,6 @@
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<div th:replace="common :: footerBootStrap"></div>
 </body>
 </html>

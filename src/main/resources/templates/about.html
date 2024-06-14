@@ -2,16 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>About Us</title>
+    <div th:replace="common :: headerBootStrap"></div>
 </head>
 <body>
+<div th:replace="common :: headerNav"></div>
 <h1>About Us</h1>
-<p>Welcome to our about page. Here you can find information about us.</p>
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/about}">About Us</a></li>
-        <li><a th:href="@{/comments}">Comments</a></li>
-    </ul>
-</nav>
+
+
+
+
+<div th:replace="common :: footerBootStrap"></div>
 </body>
 </html>
