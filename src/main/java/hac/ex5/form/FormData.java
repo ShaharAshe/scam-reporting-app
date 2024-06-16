@@ -1,4 +1,4 @@
-package hac.ex5.Form;
+package hac.ex5.form;
 
 
 import jakarta.persistence.Entity;
