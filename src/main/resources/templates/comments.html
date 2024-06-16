@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Simple Axios Test</title>
     <!-- Include Axios from CDN for AJAX -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <div th:replace="common :: headerBootStrap"></div>
+    <title>Simple Axios Test</title>
 </head>
 <body>
-
-<div th:replace="common :: headerNav"></div>
-
-<h1>Test Axios with Spring Boot</h1>
-<div>
-    <label for="sampleInput">Enter your Name:</label>
-    <input type="text" id="sampleInput" placeholder="Type something...">
-    <button onclick="sendData()">Send Data</button>
-</div>
-
-<script>
-    // THIS SHOULDNT BE USED ACCORDING TO SOLANGE
-    // WE MAKE A SCRIPTED API REQUEST AND MODIFY THE DOM
-    // BUT WE SHOULD USE SEPERATE CONTROLLERS WITH THYME ELEMENTS
-    // SO WE WILL DELETE THIS SOON
-    function sendData() {
-        const dataToSend = document.getElementById('sampleInput').value;
-        axios.post('/api/test', { message: dataToSend })
-            .then(function (response) {
-                alert('Data sent successfully: ' + response.data);
-                document.getElementById('sampleInput').value = ''; // Clear the input after sending.
-            })
-            .catch(function (error) {
-                console.error('Failed to send data:', error);
-            });
-    }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<div th:replace="common :: footerBootStrap"></div>
+    <div th:replace="common :: headerNav"></div>
+    <h1>Test Axios with Spring Boot</h1>
+    <div>
+        <label for="sampleInput">Enter your Name:</label>
+        <input type="text" id="sampleInput" placeholder="Type something...">
+        <button onclick="sendData()">Send Data</button>
+    </div>
+    <div th:replace="common :: footerBootStrap"></div>
+    <script>
+        function sendData() {
+            const dataToSend = document.getElementById('sampleInput').value;
+            axios.post('/api/test', { message: dataToSend })
+                .then(function (response) {
+                    alert('Data sent successfully: ' + response.data);
+                    document.getElementById('sampleInput').value = ''; // Clear the input after sending.
+                })
+                .catch(function (error) {
+                    console.error('Failed to send data:', error);
+                });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>

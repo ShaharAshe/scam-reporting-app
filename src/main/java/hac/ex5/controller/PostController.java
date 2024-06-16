@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PostController {
-
     private final PostService postService;
 
     @Autowired
