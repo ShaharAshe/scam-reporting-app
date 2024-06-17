@@ -3,7 +3,7 @@ package hac.ex5.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class TestRegisterForm extends RegistrationForm{
+public class TestRegisterForm {
 
 
     @NotBlank(message = "First name is required")

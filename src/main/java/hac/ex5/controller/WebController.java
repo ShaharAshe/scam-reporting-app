@@ -12,6 +12,7 @@ public class WebController implements WebMvcConfigurer {
         registry.addViewController("/comments").setViewName("comments");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/signup").setViewName("signup");
+        registry.addViewController("/success").setViewName("success");
     }
 
 }
