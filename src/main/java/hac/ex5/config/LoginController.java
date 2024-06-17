@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -17,9 +18,11 @@ public class LoginController {
                 .csrf(withDefaults())
 
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/css/**", "/", "/403", "/errorpage", "/simulateError").permitAll()
+                        .requestMatchers("/css/**", "/", "/403", "/errorpage", "/simulateError", "/signup", "/success" ,"/").permitAll()
                         .requestMatchers("/user/**").hasRole("ADMIN")
+                        .anyRequest().authenticated() // Ensures that any request not explicitly allowed requires authentication
                 )
+
                 .formLogin((form) -> form
                                 .loginPage("/login")
 //                                .loginProcessingUrl("/login")
@@ -27,7 +30,7 @@ public class LoginController {
 //                                .failureUrl("/")
                                 .permitAll()
                 )
-                .logout((logout) -> logout.permitAll())
+                .logout(LogoutConfigurer::permitAll)
                 .exceptionHandling(
                         (exceptionHandling) -> exceptionHandling
                                 .accessDeniedPage("/403")
@@ -40,9 +43,5 @@ public class LoginController {
     }
 
 
-    // instead of defining open path in the method above you can do it here:
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/favicon.ico");
-    }
+
 }
