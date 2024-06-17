@@ -15,6 +15,7 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
+    private String role;
 
     // One user can post many scam reports
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -76,4 +77,7 @@ public class User {
     public void setScamReports(Set<ScamReport> scamReports) {
         this.scamReports = scamReports;
     }
+
+    public String getRole() {return role;}
+    public void setRole(String role) {this.role = role;}
 }

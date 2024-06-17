@@ -9,6 +9,7 @@ public class WebController implements WebMvcConfigurer {
     //this works for STATIC pages
     //which means you can add controllers here for those static instead of a seperated one.
     public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
         registry.addViewController("/comments").setViewName("comments");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/signup").setViewName("signup");
