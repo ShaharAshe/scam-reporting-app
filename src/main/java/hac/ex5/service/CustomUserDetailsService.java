@@ -24,11 +24,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        hac.ex5.model.User user = userRepository.findByEmail(username); // Assumes email is used as the username
+        System.out.println("looking up user: " + username);
+        hac.ex5.model.User user = userRepository.findByUsername(username); // Assumes email is used as the username
         if (user == null) {
             throw new UsernameNotFoundException("No user found with username: " + username);
         }
-
+        System.out.println("user who inst null: " + user);
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
