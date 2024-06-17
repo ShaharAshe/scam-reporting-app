@@ -36,7 +36,8 @@ public class UserService {
 
     public void registerNewUser(TestRegisterForm form) {
         User newUser = new User();
-
+        newUser.setUsername(form.getUserName());
+        System.out.println("newUser = " + newUser.getUsername());
         newUser.setFirstName(form.getFirstName());
         System.out.println("New user created with first name: " + newUser.getFirstName());
         newUser.setLastName(form.getLastName());
@@ -44,6 +45,7 @@ public class UserService {
         newUser.setEmail(form.getEmail());
         System.out.println("New user created with email: " + newUser.getEmail());
         newUser.setPassword(passwordEncoder.encode(form.getPassword()));  // Encrypt the password before saving
+        System.out.println("New user created with password: " + newUser.getPassword());
 
 
 

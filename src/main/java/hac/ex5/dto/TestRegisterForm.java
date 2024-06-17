@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 
 public class TestRegisterForm {
 
+    @NotBlank(message = "User Name is required")
+    private String userName;
 
     @NotBlank(message = "First name is required")
     private String firstName;
@@ -30,7 +32,12 @@ public class TestRegisterForm {
     private String comments;
 
 
-
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
     public String getFirstName() {
         return firstName;
     }

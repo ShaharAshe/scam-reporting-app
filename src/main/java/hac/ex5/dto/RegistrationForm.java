@@ -9,6 +9,10 @@ import jakarta.validation.constraints.Size;
 
 public class RegistrationForm {
 
+    //need to add some pattern etc for usernmae
+    @NotBlank(message = "User Name is required")
+    private String userName;
+
     @NotBlank(message = "First name is required")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "First name is invalid")
     private String firstName;
