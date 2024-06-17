@@ -18,9 +18,7 @@ public class LoginController {
 
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/css/**", "/", "/403", "/errorpage", "/simulateError").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/user/**").hasRole("USER")
-                        .requestMatchers("/shared/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/user/**").hasRole("ADMIN")
                 )
                 .formLogin((form) -> form
                                 .loginPage("/login")
