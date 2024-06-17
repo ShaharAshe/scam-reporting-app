@@ -11,19 +11,34 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
     private String username;
     private String password;
     private String email;
 
+
+    private String firstName;
+    private String lastName;
     // One user can post many scam reports
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ScamReport> scamReports;
 
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+
+
     public void setFirstName(String firstName) {
-        this.username = firstName;
+        this.firstName = firstName;
     }
     public String getFirstName() {
-        return this.username;
+        return this.firstName;
     }
     public void setLastName(String lastName) {
         this.password = lastName;
@@ -42,6 +57,10 @@ public class User {
     }
     public String getPassword() {
         return this.password;
+    }
+
+    public Long getId() {
+        return this.id;
     }
     // Getters and Setters
 }

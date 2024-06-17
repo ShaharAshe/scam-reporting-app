@@ -40,7 +40,7 @@ public class RegistrationController {
             return "signup";
         }
 
-        //userService.registerNewUser(registrationForm);
+        userService.registerNewUser(registrationForm);
         return "redirect:/success";
     }
 }
