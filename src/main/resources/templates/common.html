@@ -41,23 +41,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <ol>
-                            <li><ul>
-                                <li><u>name</u>: Shahar Asher</li>
-                                <li><u>Mail</u>: shaharas@edu.hac.ac.il</li>
-                            </ul></li>
-                            <hr>
-                            <li><ul>
-                                <li><u>name</u>: Yaniv Gabay</li>
-                                <li><u>Mail</u>: yanivga@edu.hac.ac.il</li>
-                            </ul></li>
-                        </ol>
+                        <div class="list-group">
+                            <!-- List group item for each person -->
+                            <div class="list-group-item">
+                                <h5 class="mb-1">Name: <u>Shahar Asher</u></h5>
+                                <p class="mb-1">Mail: <a href="mailto:shaharas@edu.hac.ac.il">shaharas@edu.hac.ac.il</a></p>
+                            </div>
+                            <div class="list-group-item">
+                                <h5 class="mb-1">Name: <u>Yaniv Gabay</u></h5>
+                                <p class="mb-1">Mail: <a href="mailto:yanivga@edu.hac.ac.il">yanivga@edu.hac.ac.il</a></p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
                 </div>
             </div>
         </div>
     </div>
+
+
     <div th:fragment="postsList">
         <ul>
             <li th:each="post : ${posts}" th:text="${post.title + ' - ' + post.content}"></li>

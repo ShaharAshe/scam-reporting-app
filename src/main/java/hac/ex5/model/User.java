@@ -19,5 +19,29 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ScamReport> scamReports;
 
+    public void setFirstName(String firstName) {
+        this.username = firstName;
+    }
+    public String getFirstName() {
+        return this.username;
+    }
+    public void setLastName(String lastName) {
+        this.password = lastName;
+    }
+    public String getLastName() {
+        return this.password;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getEmail() {
+        return this.email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getPassword() {
+        return this.password;
+    }
     // Getters and Setters
 }
