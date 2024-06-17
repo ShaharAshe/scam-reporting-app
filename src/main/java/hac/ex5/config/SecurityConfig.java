@@ -3,14 +3,13 @@ package hac.ex5.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-public class LoginController {
+public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -26,14 +25,19 @@ public class LoginController {
                         .anyRequest().authenticated() // Ensures that any request not explicitly allowed requires authentication
                 )
 
-                .formLogin((form) -> form
-                                .loginPage("/login")
-//                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/", true)
-//                                .failureUrl("/")
-                                .permitAll()
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/login?error=true")
+                        .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll)
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .permitAll()
+                )
                 .exceptionHandling(
                         (exceptionHandling) -> exceptionHandling
                                 .accessDeniedPage("/403")

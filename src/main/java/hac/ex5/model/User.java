@@ -1,6 +1,8 @@
 package hac.ex5.model;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,6 +22,8 @@ public class User {
     // One user can post many scam reports
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ScamReport> scamReports;
+
+
 
     // Getters and Setters
     public Long getId() {
