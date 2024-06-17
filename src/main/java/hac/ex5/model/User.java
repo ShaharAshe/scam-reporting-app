@@ -1,66 +1,79 @@
 package hac.ex5.model;
 
-
-import jakarta.persistence.Id;
-
 import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String username;
     private String password;
     private String email;
-
-
     private String firstName;
     private String lastName;
+
     // One user can post many scam reports
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ScamReport> scamReports;
 
-
-    public void setUsername(String username) {
-        this.username = username;
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    public String getFirstName() {
-        return this.firstName;
-    }
-    public void setLastName(String lastName) {
-        this.password = lastName;
-    }
+
     public String getLastName() {
-        return this.password;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getEmail() {
-        return this.email;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getPassword() {
-        return this.password;
+        return lastName;
     }
 
-    public Long getId() {
-        return this.id;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
-    // Getters and Setters
+
+    public Set<ScamReport> getScamReports() {
+        return scamReports;
+    }
+
+    public void setScamReports(Set<ScamReport> scamReports) {
+        this.scamReports = scamReports;
+    }
 }

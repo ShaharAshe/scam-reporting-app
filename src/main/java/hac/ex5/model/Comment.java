@@ -1,7 +1,5 @@
 package hac.ex5.model;
 
-
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,4 +15,27 @@ public class Comment {
     private ScamReport scamReport;
 
     // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public ScamReport getScamReport() {
+        return scamReport;
+    }
+
+    public void setScamReport(ScamReport scamReport) {
+        this.scamReport = scamReport;
+    }
 }

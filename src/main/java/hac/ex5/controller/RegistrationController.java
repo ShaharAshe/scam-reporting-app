@@ -23,7 +23,7 @@ public class RegistrationController {
     }
     // YOU HAVE TWO REGISTRATION FORM OBJECTS:
     //1. RegistrationForm
-    //2. TestRegisterForm - eaiser for testing simple validate (length = 1)
+    //2. TestRegisterForm - easier for testing simple validate (length = 1)
     @GetMapping("/signup")
     public String showForm(Model model) {
         model.addAttribute("registrationForm", new TestRegisterForm());
