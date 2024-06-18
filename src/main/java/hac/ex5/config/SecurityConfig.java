@@ -23,8 +23,8 @@ public class SecurityConfig {
                 .csrf().disable()
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/css/**", "/", "/403", "/errorpage", "/simulateError", "/signup", "/success", "/").permitAll()
-                        .requestMatchers("/user/**").hasRole("ADMIN")
+                        .requestMatchers("/css/**","/media/**", "/", "/403", "/errorpage", "/simulateError", "/signup", "/success","/feed", "/").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
