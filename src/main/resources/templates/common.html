@@ -26,7 +26,17 @@
                                 <li class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/feed}">feed</a></li>
                                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/login}">Log In</a></li>
                                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/signup}">sign Up</a></li>
-                                <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/signout}">sign out</a></li>
+
+                                <li sec:authorize="isAuthenticated()" class="nav-item">
+                                    Logged user: <span sec:authentication="name">?</span> |
+                                    Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span> |
+                                    <form th:action="@{/logout}" method="post" style="display:inline">
+                                        <button type="submit" class="btn btn-dark mx-2" value="Logout">log out</button>
+                                    </form>
+<!--                                    <a class="btn btn-dark mx-2" th:href="@{/signout}">log out</a>-->
+                                </li>
+
+                                <li sec:authorize="isAuthenticated()" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/admin}">admin</a></li>
                             </ul>
                         </div>
                     </div>

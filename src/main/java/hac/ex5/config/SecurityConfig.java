@@ -34,11 +34,7 @@ public class SecurityConfig {
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .permitAll()
-                )
+                .logout(LogoutConfigurer::permitAll)
                 .exceptionHandling(exceptions -> exceptions
                         .accessDeniedPage("/403")
                 );
