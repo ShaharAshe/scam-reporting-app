@@ -20,10 +20,6 @@ public class ScamReport {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // One scam report can have many comments
-    @OneToMany(mappedBy = "scamReport", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Comment> comments;
-
     // Getters and Setters
 
     public Long getId() {
@@ -64,13 +60,5 @@ public class ScamReport {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 }

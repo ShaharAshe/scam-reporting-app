@@ -11,6 +11,12 @@
     <!-- Other common elements -->
     <div th:fragment="headerNav">
         <div class="row"><div class="col-12 text-center d-none d-sm-block"><img src="/media/header.jpg" class="img-fluid" alt="header image"></div></div>
+        <div sec:authorize="isAuthenticated()" class="row">
+            <div class="col">
+                <p>Logged user: <span sec:authentication="name">?</span> |
+                    Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span></p>
+            </div>
+        </div>
         <div class="row text-center">
             <div class="col text-center">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,12 +34,9 @@
                                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/signup}">sign Up</a></li>
 
                                 <li sec:authorize="isAuthenticated()" class="nav-item">
-                                    Logged user: <span sec:authentication="name">?</span> |
-                                    Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span> |
                                     <form th:action="@{/logout}" method="post" style="display:inline">
                                         <button type="submit" class="btn btn-dark mx-2" value="Logout">log out</button>
                                     </form>
-<!--                                    <a class="btn btn-dark mx-2" th:href="@{/signout}">log out</a>-->
                                 </li>
 
                                 <li sec:authorize="isAuthenticated()" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/admin}">admin</a></li>

@@ -12,6 +12,7 @@ public class Post {
     }
 
     // Getters and setters
+
     public Long getId() {
         return id;
     }
