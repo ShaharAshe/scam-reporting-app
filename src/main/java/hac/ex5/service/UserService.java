@@ -50,7 +50,10 @@ public class UserService {
             System.out.println("New user created with password: " + newUser.getPassword());
             newUser.setRole("USER");
 
-
+            newUser.setDateOfBirth(form.getDateOfBirth());
+            newUser.setGender(form.getGender());
+            newUser.setComments(form.getComments());
+            
             userRepository.save(newUser);
             //ID IS ONLY CREATED AFTER WE .save
             System.out.println("New user registered with id: {}" + newUser.getId());

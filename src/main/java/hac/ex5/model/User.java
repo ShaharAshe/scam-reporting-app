@@ -1,6 +1,10 @@
 package hac.ex5.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 import java.util.Set;
@@ -13,17 +17,21 @@ public class User {
     private Long id;
 
     private String username;
-    private String password;
-    private String email;
     private String firstName;
     private String lastName;
+    private String email;
+    private String password;
+
     private String role;
+
+    private String dateOfBirth;
+    private String gender;
+    private String comments;
+
 
     // One user can post many scam reports
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ScamReport> scamReports;
-
-
 
     // Getters and Setters
     public Long getId() {
@@ -84,4 +92,25 @@ public class User {
 
     public String getRole() {return role;}
     public void setRole(String role) {this.role = role;}
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 }

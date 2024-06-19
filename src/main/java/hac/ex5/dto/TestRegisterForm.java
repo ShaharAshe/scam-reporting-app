@@ -1,7 +1,10 @@
 package hac.ex5.dto;
 
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class TestRegisterForm {
 
@@ -9,15 +12,20 @@ public class TestRegisterForm {
     private String userName;
 
     @NotBlank(message = "First name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "First name is invalid")
     private String firstName;
 
     @NotBlank(message = "Last name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Last name is invalid")
     private String lastName;
 
     @NotBlank(message = "Email is required")
+    @Email(message = "Email is invalid")
     private String email;
 
     @NotBlank(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).*$", message = "Password must contain at least one uppercase letter, one lowercase letter, and one digit")
     private String password;
 
     @NotBlank(message = "Password confirmation is required")
@@ -26,7 +34,7 @@ public class TestRegisterForm {
     @NotBlank(message = "Date of birth is required")
     private String dateOfBirth;
 
-
+    @NotBlank(message = "Gender is required")
     private String gender;
 
     private String comments;
