@@ -27,7 +27,7 @@ public class ScamReportController {
     @GetMapping("/posts")
     public String showScamReportForm(Model model) {
         model.addAttribute("scamReport", new ScamReport());
-        return "admin/posts";
+        return "user/posts";
     }
 
     @PostMapping("/posts")

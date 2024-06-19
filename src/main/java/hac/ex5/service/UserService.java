@@ -28,7 +28,7 @@ public class UserService {
         newUser.setLastName(form.getLastName());
         newUser.setEmail(form.getEmail());
         newUser.setPassword(passwordEncoder.encode(form.getPassword()));  // Encrypt the password before saving
-        newUser.setRole("ADMIN");
+        newUser.setRole("USER");
 
         // Additional logic can be added here, such as setting roles, sending confirmation emails, etc.
 
@@ -47,7 +47,7 @@ public class UserService {
         System.out.println("New user created with email: " + newUser.getEmail());
         newUser.setPassword(passwordEncoder.encode(form.getPassword()));  // Encrypt the password before saving
         System.out.println("New user created with password: " + newUser.getPassword());
-        newUser.setRole("ADMIN");
+        newUser.setRole("USER");
 
 
         userRepository.save(newUser);
