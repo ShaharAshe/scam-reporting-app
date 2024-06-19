@@ -40,7 +40,7 @@
                                 </li>
 
                                 <li sec:authorize="isAuthenticated()" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/postsManager}">Posts manager</a></li>
-                                <li sec:authorize="isAuthenticated()" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/admin}">Admin area</a></li>
+                                <li sec:authorize="isAuthenticated() && hasRole('ADMIN')" class="nav-item"><a class="btn btn-dark mx-2" th:href="@{/admin}">Admin area</a></li>
                             </ul>
                         </div>
                     </div>
