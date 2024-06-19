@@ -18,12 +18,14 @@
         <div class="col-4 d-none d-md-block"></div>
         <div class="col-12 col-lg-4">
             <form class="row g-3 form" th:action="@{/signup}" th:object="${registrationForm}" method="post">
-
                 <div class="col-12 ">
                     <label for="User-Name" class="form-label">User name</label>
                     <input type="text" class="form-control" th:field="*{userName}" id="User-Name">
                     <div class="bad-val-cu alert alert-danger" th:if="${#fields.hasErrors('userName')}">
                         <span th:errors="*{userName}"></span>
+                    </div>
+                    <div class="alert alert-danger" th:if="${UserNameError}">
+                        The User is already exist.
                     </div>
                 </div>
 
@@ -50,6 +52,9 @@
                     </div>
                     <div class="bad-val-cu alert alert-danger" th:if="${#fields.hasErrors('email')}">
                         <span th:errors="*{email}"></span>
+                    </div>
+                    <div class="alert alert-danger" th:if="${EmailError}">
+                        The Email is already used.
                     </div>
                 </div>
                 <div class="col-12 col-md-6">

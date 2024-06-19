@@ -36,22 +36,26 @@ public class UserService {
     }
 
     public void registerNewUser(TestRegisterForm form) {
-        User newUser = new User();
-        newUser.setUsername(form.getUserName());
-        System.out.println("newUser = " + newUser.getUsername());
-        newUser.setFirstName(form.getFirstName());
-        System.out.println("New user created with first name: " + newUser.getFirstName());
-        newUser.setLastName(form.getLastName());
-        System.out.println("New user created with last name: " + newUser.getLastName());
-        newUser.setEmail(form.getEmail());
-        System.out.println("New user created with email: " + newUser.getEmail());
-        newUser.setPassword(passwordEncoder.encode(form.getPassword()));  // Encrypt the password before saving
-        System.out.println("New user created with password: " + newUser.getPassword());
-        newUser.setRole("USER");
+        if (userRepository.findByUsername(form.getUserName()) == null) {
+            User newUser = new User();
+            newUser.setUsername(form.getUserName());
+            System.out.println("newUser = " + newUser.getUsername());
+            newUser.setFirstName(form.getFirstName());
+            System.out.println("New user created with first name: " + newUser.getFirstName());
+            newUser.setLastName(form.getLastName());
+            System.out.println("New user created with last name: " + newUser.getLastName());
+            newUser.setEmail(form.getEmail());
+            System.out.println("New user created with email: " + newUser.getEmail());
+            newUser.setPassword(passwordEncoder.encode(form.getPassword()));  // Encrypt the password before saving
+            System.out.println("New user created with password: " + newUser.getPassword());
+            newUser.setRole("USER");
 
 
-        userRepository.save(newUser);
-        //ID IS ONLY CREATED AFTER WE .save
-        System.out.println("New user registered with id: {}" + newUser.getId());
+            userRepository.save(newUser);
+            //ID IS ONLY CREATED AFTER WE .save
+            System.out.println("New user registered with id: {}" + newUser.getId());
+        } else {
+            System.out.println("user already exists, skipping creation.");
+        }
     }
 }
