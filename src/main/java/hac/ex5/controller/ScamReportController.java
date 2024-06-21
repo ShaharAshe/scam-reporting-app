@@ -12,17 +12,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
+import java.util.List;
+
 
 @Controller
 public class ScamReportController {
 
-    @Autowired
-    private ScamReportRepository scamReportRepository;
+    private final ScamReportRepository scamReportRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public ScamReportController(ScamReportRepository scamReportRepository, UserRepository userRepository) {
+        this.scamReportRepository = scamReportRepository;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/posts")
     public String showScamReportForm(Model model) {
@@ -30,12 +36,22 @@ public class ScamReportController {
         return "user/posts";
     }
 
+    @GetMapping("/feed")
+    public String showFeed(Model model) {
+        List<ScamReport> scamReports = scamReportRepository.findAllByIdNotNullOrderByDateReported();
+        model.addAttribute("scamReports", scamReports);
+        return "feed"; // Assuming 'feed.html' is your Thymeleaf template for the feed page
+    }
+
+
     @PostMapping("/posts")
-    public String submitScamReport(@ModelAttribute ScamReport scamReport, @AuthenticationPrincipal UserDetails userDetails) {
+    public String submitScamReport(@ModelAttribute ScamReport scamReport, @AuthenticationPrincipal UserDetails userDetails, RedirectAttributes redirectAttributes) {
         User user = userRepository.findByUsername(userDetails.getUsername());
         scamReport.setUser(user);
         scamReport.setDateReported(new Date());
         scamReportRepository.save(scamReport);
-        return "redirect:/";
+        redirectAttributes.addFlashAttribute("message", "Scam report added successfully!");
+        return "redirect:/feed";
     }
+
 }

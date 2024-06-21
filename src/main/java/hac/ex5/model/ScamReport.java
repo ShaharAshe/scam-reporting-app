@@ -12,6 +12,8 @@ public class ScamReport {
     private Long id;
 
     private String title;
+    private String url;
+
     private String description;
     private Date dateReported;
 
@@ -21,6 +23,9 @@ public class ScamReport {
     private User user;
 
     // Getters and Setters
+    public String getUrl()
+    { return url; }
+    public void setUrl(String url) { this.url = url; }
 
     public Long getId() {
         return id;
