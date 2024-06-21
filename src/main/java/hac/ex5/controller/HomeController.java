@@ -1,5 +1,7 @@
 package hac.ex5.controller;
 
+import hac.ex5.repo.ScamReportRepository;
+import hac.ex5.repo.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class HomeController {
 
+    private final ScamReportRepository scamReportRepository;
+    private final UserRepository userRepository;
+
+    public HomeController(ScamReportRepository scamReportRepository, UserRepository userRepository) {
+        this.scamReportRepository = scamReportRepository;
+        this.userRepository = userRepository;
+    }
+
     @GetMapping({"/", "/index"})
     public String showIndex(Model model) {
-        // model.addAttribute("posts", postService.getPosts());
+
+        long totalReports = scamReportRepository.countAllByDateReportedIsTrue();
+        long totalUsers = userRepository.countAllByEmailIsTrueAndRoleContaining("USER");
+        model.addAttribute("totalReports", totalReports);
+        model.addAttribute("totalUsers", totalUsers);
         return "index";  // Ensure this is returning 'index' view
     }
 

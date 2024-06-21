@@ -10,11 +10,11 @@
 </head>
 <body>
 <div class="container-fluid text-center">
-    <div th:replace="~{common :: headerNav}"></div>
+    <div th:replace="~{common :: combinedHeader}"></div>
     <div class="row">
         <div class="col-4 d-none d-md-block"></div>
         <div class="col-12 col-lg-4">
-            <form class="row g-3 form" th:action="@{/posts}" th:object="${scamReport}" method="post">
+            <form class="row g-3 form" th:action="@{/scam-reports}" th:object="${scamReport}" method="post">
                 <div class="col-12">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" class="form-control" th:field="*{title}" id="title" required>

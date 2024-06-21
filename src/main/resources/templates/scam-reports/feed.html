@@ -11,15 +11,14 @@
 </head>
 <body>
     <div class="container-fluid text-center">
-        <div th:replace="~{common :: headerNav}"></div>
+        <div th:replace="~{common :: combinedHeader}"></div>
         <div sec:authorize="isAuthenticated()" class="row text-center">
 
             <div th:if="${message}" class="alert alert-success" th:text="${message}">
                 Feedback message here.
             </div>
-            <div class="col text-center">
-                <a th:href="@{/posts}" class="btn btn-info btn-lg">+ add new scam post</a>
-            </div>
+
+            <div th:replace="~{common :: addPostButton}"></div>
 
             <div class="container mt-4">
                 <div th:each="scamReport : ${scamReports}" class="card mb-2">

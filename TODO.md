@@ -2,10 +2,10 @@
 
 ---
 
-1. Check if the alerts to the registration are OK.
-2. Show all the scam posts to all the users in the website.
-3. Show to each login user it's post in the admin area.
-4. maybe give the option to delete post in the admin area.
-5. add the admin area controls.
-6. Handle session.
-7. Handle cookies.
+- [X] Check if the alerts to the registration are OK.
+- [X] Show all the scam posts to all the users on the website.
+- [ ] Show each logged-in user their posts in the admin area.
+- [ ] Maybe give the option to delete posts in the admin area.
+- [ ] Add the admin area controls.
+- [ ] Handle session.
+- [ ] Handle cookies.
