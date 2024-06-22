@@ -24,8 +24,8 @@ public class ScamReportService {
         this.userRepository = userRepository;
     }
 
-    public List<ScamReport> getAllReports() {
-        return scamReportRepository.findAllByOrderByDateReportedDesc();
+    public List<ScamReport> getAllReportsOrdered() {
+        return scamReportRepository.findAllByIdNotNullOrderByDateReported();
     }
 
     public List<ScamReport> getUserReports(User user) {

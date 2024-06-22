@@ -35,7 +35,7 @@ public class ScamReportController {
 
     @GetMapping("/feed")
     public String showFeed(Model model) {
-        List<ScamReport> scamReports = scamReportService.getAllReports();
+        List<ScamReport> scamReports = scamReportService.getAllReportsOrdered();
         model.addAttribute("scamReports", scamReports);
         return "scam-reports/feed";
     }
