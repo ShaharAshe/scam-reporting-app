@@ -53,7 +53,7 @@
                 <li><a class="nav-link" th:href="@{/}">Home</a></li>
                 <li><a class="nav-link" th:href="@{/scam-reports/feed}">Feed</a></li>
                 <li><button class="btn btn-link nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">About Us</button></li>
-                <li sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/admin}">Admin Area</a></li>
+                <li sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/scam-reports/admin}">Admin Area</a></li>
             </ul>
 
             <!-- Authentication Links -->

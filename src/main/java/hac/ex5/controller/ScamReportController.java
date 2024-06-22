@@ -48,6 +48,13 @@ public class ScamReportController {
         return "scam-reports/manage";
     }
 
+    @GetMapping("/admin")
+    public String showAdmin(@RequestParam(defaultValue = "newest") String sort,Model model) {
+        List<ScamReport> scamReports = scamReportService.getFeed(sort);
+        model.addAttribute("scamReports", scamReports);
+        return "admin/admin";
+    }
+
     @PostMapping
     public String submitScamReport(@ModelAttribute ScamReport scamReport, @AuthenticationPrincipal UserDetails userDetails, RedirectAttributes redirectAttributes) {
         scamReportService.createScamReport(scamReport, userDetails);
@@ -63,6 +70,12 @@ public class ScamReportController {
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
         }
+
+        User user = userRepository.findByUsername(userDetails.getUsername());
+
+        if (user.getRole().equals("ADMIN"))
+            return "redirect:/admin";
         return "redirect:/scam-reports/manage";
     }
+
 }

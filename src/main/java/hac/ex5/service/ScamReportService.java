@@ -56,6 +56,8 @@ public class ScamReportService {
 
         if (report.getUser().getId().equals(user.getId())) {
             scamReportRepository.deleteById(postId);
+        } else if (user.getRole().equals("ADMIN")) {
+            scamReportRepository.deleteById(postId);
         } else {
             throw new IllegalArgumentException("You can only delete your own posts!");
         }
