@@ -8,4 +8,5 @@
 - [X] Maybe give the option to delete posts in the user admin area.
 - [ ] Add the admin area controls.
 - [ ] Handle session.
+- [ ] How to prevent entering success.html, when you didnt finish to register?
 - [ ] Handle cookies.

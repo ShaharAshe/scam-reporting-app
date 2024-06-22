@@ -19,10 +19,22 @@
         <div th:replace="~{common :: addPostButton}"></div>
         <!-- In your scam-reports/feed.html -->
         <div class="container mt-4">
+            <form action="#" method="get" class="mb-3">
+                <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort By
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><button class="dropdown-item" type="submit" name="sort" value="newest">Newest</button></li>
+                        <li><button class="dropdown-item" type="submit" name="sort" value="oldest">Oldest</button></li>
+                    </ul>
+                </div>
+            </form>
             <div th:each="scamReport : ${scamReports}" class="card mb-3">
                 <div th:replace="~{scam-reports/common :: scamReportCard(${scamReport})}"></div>
             </div>
         </div>
+
 
     </div>
 </div>

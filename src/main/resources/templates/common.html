@@ -10,6 +10,16 @@
 <body>
 
 
+<div th:fragment="centerHeroBox(header,content)">
+<div class="px-4 py-5 my-5 text-center">
+
+    <h1 class="display-5 fw-bold text-body-emphasis" th:text="${header}"></h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4" th:text="${content}"></p>
+
+    </div>
+</div>
+</div>
 
 <div th:fragment="addPostButton">
     <div class="col text-center my-4">
@@ -20,48 +30,44 @@
 </div>
 
 <div th:fragment="combinedHeader">
-    <!-- Header Image -->
-    <div class="bg-light border-bottom">
-    <div class="py-3 text-center">
-        <img src="/media/header.jpg" class="img-fluid" alt="Header Image" style="max-height: 150px;">
-    </div>
+
 
     <!-- User Information, only visible when logged in -->
     <div sec:authorize="isAuthenticated()" class="text-center py-2">
         <p class="mb-0">Logged user: <span sec:authentication="name" class="fw-bold">User Name</span> |
             Roles: <span sec:authentication="principal.authorities" class="fw-bold">[ROLE_USER, ROLE_ADMIN]</span></p>
     </div>
-</div>
 
 
 
-
-    <!-- Responsive Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
             <!-- Branding Image -->
+
             <a class="navbar-brand" th:href="@{/}">
-                <img src="/media/logo-nav.png" alt="Logo" class="img-fluid" style="height: 40px;">
+                <img src="/media/icon.png" alt="Logo" class="navbar-brand-img">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link active" th:href="@{/}">Home</a>
-                    <a class="nav-link" th:href="@{/scam-reports/feed}">Feed</a>
-                    <button class="btn btn-link nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">About Us</button>
-                    <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/login}">Log In</a>
-                    <a sec:authorize="!isAuthenticated()" class="nav-link" th:href="@{/signup}">Sign Up</a>
-                    <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/scam-reports/manage}">Posts Manager</a>
-                    <a sec:authorize="hasRole('ADMIN')" class="nav-link" th:href="@{/admin}">Admin Area</a>
-                    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-outline-danger">Logout</button>
-                    </form>
-                </div>
+
+            <!-- Navigation Links -->
+            <ul class="nav me-auto mb-2 mb-md-0">
+                <li><a class="nav-link" th:href="@{/}">Home</a></li>
+                <li><a class="nav-link" th:href="@{/scam-reports/feed}">Feed</a></li>
+                <li><button class="btn btn-link nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">About Us</button></li>
+                <li sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href="@{/admin}">Admin Area</a></li>
+            </ul>
+
+            <!-- Authentication Links -->
+            <div class="text-end">
+                <a sec:authorize="!isAuthenticated()" class="btn btn-outline-primary me-2" th:href="@{/login}">Log In</a>
+                <a sec:authorize="!isAuthenticated()" class="btn btn-primary" th:href="@{/signup}">Sign Up</a>
+                <a sec:authorize="isAuthenticated()" class="btn btn-primary" th:href="@{/scam-reports/manage}">Manage Posts </a>
+                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-outline-danger">Logout</button>
+                </form>
             </div>
-        </div>
-    </nav>
+        </header>
+    </div>
+
 
 
     <!-- Modal for About Us -->

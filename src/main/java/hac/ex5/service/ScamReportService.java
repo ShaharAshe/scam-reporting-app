@@ -23,7 +23,17 @@ public class ScamReportService {
         this.scamReportRepository = scamReportRepository;
         this.userRepository = userRepository;
     }
+    public List<ScamReport> getFeed(String sort)
+    {
+        List<ScamReport> scamReports;
+        if ("oldest".equals(sort)) {
+            scamReports = scamReportRepository.findAllByOrderByDateReportedAsc();
+        } else {
+            scamReports = scamReportRepository.findAllByOrderByDateReportedDesc();
+        }
 
+        return scamReports;
+    }
     public List<ScamReport> getAllReportsOrdered() {
         return scamReportRepository.findAllByIdNotNullOrderByDateReported();
     }

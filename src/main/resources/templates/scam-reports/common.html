@@ -22,6 +22,7 @@
 <div th:fragment="scamReportCard(scamReport)">
     <div class="card mb-3">
         <div class="card-header">
+            User: <span th:text="${scamReport.user.username}"></span>
             <span th:text="${scamReport.user.firstName} + ' ' + ${scamReport.user.lastName}">Username</span>
             at <span th:text="${#dates.format(scamReport.dateReported, 'yyyy-MM-dd HH:mm')}">Date</span>
         </div>

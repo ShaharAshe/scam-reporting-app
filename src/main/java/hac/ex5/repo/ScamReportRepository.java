@@ -21,4 +21,6 @@ public interface ScamReportRepository extends JpaRepository<ScamReport, Long> {
     List<ScamReport> findAllByUserIdOrderByDateReportedDesc(Long id);
 
     List<ScamReport> findAllByOrderByDateReportedDesc();
+
+    List<ScamReport> findAllByOrderByDateReportedAsc();
 }
