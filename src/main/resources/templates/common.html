@@ -60,7 +60,8 @@
             <div class="text-end">
                 <a sec:authorize="!isAuthenticated()" class="btn btn-outline-primary me-2" th:href="@{/login}">Log In</a>
                 <a sec:authorize="!isAuthenticated()" class="btn btn-primary" th:href="@{/signup}">Sign Up</a>
-                <a sec:authorize="isAuthenticated()" class="btn btn-primary" th:href="@{/scam-reports/manage}">Manage Posts </a>
+                <a sec:authorize="isAuthenticated()" class="btn btn-primary" th:href="@{/scam-reports/manage}">Manage Posts</a>
+                <a sec:authorize="isAuthenticated()" class="btn btn-danger" th:href="@{/scam-reports/likedPosts}">Liked Posts</a>
                 <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="d-inline">
                     <button type="submit" class="btn btn-outline-danger">Logout</button>
                 </form>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -61,5 +62,12 @@ public class ScamReportService {
         } else {
             throw new IllegalArgumentException("You can only delete your own posts!");
         }
+    }
+
+    public List<ScamReport> getScamReportsByIds(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return scamReportRepository.findAllById(ids);
     }
 }
