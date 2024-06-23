@@ -18,6 +18,7 @@
                 <div class="mb-3">
                     <label for="User-Name" class="form-label">User name</label>
                     <input type="text" class="form-control" th:field="*{userName}" id="User-Name">
+                    <div class="alert alert-danger" th:if="${UserNameError}">You need to choose another username, as that one is already taken!</div>
                     <div class="alert alert-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
                 </div>
 
@@ -39,6 +40,7 @@
                 <div class="mb-3">
                     <label for="Email" class="form-label">Email</label>
                     <input type="email" class="form-control" th:field="*{email}" id="Email">
+                    <div class="alert alert-danger" th:if="${EmailError == true}">You need to choose another email address, as that one is already taken!</div>
                     <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
 

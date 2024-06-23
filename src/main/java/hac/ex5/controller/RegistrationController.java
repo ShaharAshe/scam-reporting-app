@@ -24,33 +24,31 @@ public class RegistrationController {
         this.userService = userService;
         this.userRepository = userRepository;
     }
-    // YOU HAVE TWO REGISTRATION FORM OBJECTS:
-    //1. RegistrationForm
-    //2. TestRegisterForm - easier for testing simple validate (length = 1)
+
     @GetMapping("/signup")
     public String showForm(Model model) {
         model.addAttribute("registrationForm", new TestRegisterForm());
         model.addAttribute("genders", GENDERS);
         return "signup";
     }
-    //AS WELL TO CHANGE THE OBJECT HERE
+
     @PostMapping("/signup")
     public String handleFormSubmission(@Valid @ModelAttribute("registrationForm") TestRegisterForm registrationForm, BindingResult bindingResult, Model model) {
         boolean hasErrors = userRepository.findByUsername(registrationForm.getUserName()) != null ||
                             userRepository.findByEmail(registrationForm.getEmail()) != null;
 
-        if (bindingResult.hasErrors() || hasErrors) {
-            System.out.println(registrationForm);
-            System.out.println(bindingResult);
+        if (hasErrors) {
             model.addAttribute("genders", GENDERS);
-            if (userRepository.findByUsername(registrationForm.getUserName()) != null)
-                model.addAttribute("UserNameError", true);
-            if (userRepository.findByEmail(registrationForm.getEmail()) != null)
-                model.addAttribute("EmailError", true);
+
+            model.addAttribute("UserNameError", userRepository.findByUsername(registrationForm.getUserName()) != null);
+            model.addAttribute("EmailError", userRepository.findByEmail(registrationForm.getEmail()) != null);
+
+            System.out.println("UserNameError" + userRepository.findByUsername(registrationForm.getUserName()) != null);
+            System.out.println("EmailError" + userRepository.findByEmail(registrationForm.getEmail()) != null);
             return "signup";
         }
 
         userService.registerNewUser(registrationForm);
-        return "redirect:/success";
+        return "success";
     }
 }

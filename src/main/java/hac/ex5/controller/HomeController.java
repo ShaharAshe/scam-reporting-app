@@ -52,6 +52,12 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping({"/success"})
+    public String showSuccess(Model model) {
+        return "redirect:/";
+    }
+
+
     @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleException(Exception ex, Model model) {
