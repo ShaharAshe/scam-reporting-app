@@ -2,13 +2,19 @@ package hac.ex5.controller;
 
 import hac.ex5.repo.ScamReportRepository;
 import hac.ex5.repo.UserRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class HomeController {
@@ -22,13 +28,28 @@ public class HomeController {
     }
 
     @GetMapping({"/", "/index"})
-    public String showIndex(Model model) {
+    public String showIndex(Model model, HttpServletResponse response, @CookieValue(value = "visitTime", defaultValue = "N/A") String visitTime) {
+        System.out.println("cookies last: "+visitTime);
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = now.toString();
+        System.out.println("cookies new: "+currentTime);
+
+        Cookie cookie = new Cookie("visitTime", currentTime);
+        System.out.println("cookies: "+visitTime);
+
+        cookie.setMaxAge(7 * 24 * 60 * 60);
+        System.out.println("cookies: "+visitTime);
+
+        response.addCookie(cookie);
+        System.out.println("cookies: "+visitTime);
+
 
         long totalReports = scamReportRepository.countAllByDateReportedIsTrue();
         long totalUsers = userRepository.countAllByEmailIsTrueAndRoleContaining("USER");
         model.addAttribute("totalReports", totalReports);
         model.addAttribute("totalUsers", totalUsers);
-        return "index";  // Ensure this is returning 'index' view
+        model.addAttribute("visitTime", visitTime);
+        return "index";
     }
 
     @ExceptionHandler({Exception.class})

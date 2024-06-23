@@ -13,7 +13,6 @@
 <div th:fragment="deleteReportButton(scamReport)">
     <div class="card mb-3">
         <form th:action="@{/scam-reports/delete/{id}(id=${scamReport.id})}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
     </div>
