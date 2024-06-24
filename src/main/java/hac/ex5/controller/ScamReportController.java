@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,13 @@ public class ScamReportController {
 
     private final ScamReportService scamReportService;
     private final UserRepository userRepository;
+    private final SimpMessagingTemplate messagingTemplate;
 
     @Autowired
-    public ScamReportController(ScamReportService scamReportService, UserRepository userRepository) {
+    public ScamReportController(ScamReportService scamReportService, UserRepository userRepository, SimpMessagingTemplate messagingTemplate) {
         this.scamReportService = scamReportService;
         this.userRepository = userRepository;
+        this.messagingTemplate = messagingTemplate;
     }
 
     @GetMapping("/new")
@@ -61,6 +64,7 @@ public class ScamReportController {
     public String submitScamReport(@ModelAttribute ScamReport scamReport, @AuthenticationPrincipal UserDetails userDetails, RedirectAttributes redirectAttributes) {
         scamReportService.createScamReport(scamReport, userDetails);
         redirectAttributes.addFlashAttribute("message", "Scam report added successfully!");
+        messagingTemplate.convertAndSend("/topic/scamReports", "Post is added");
         return "redirect:/scam-reports/feed";
     }
 
@@ -68,6 +72,7 @@ public class ScamReportController {
     public String deleteScamReport(@PathVariable Long postId, @AuthenticationPrincipal UserDetails userDetails, RedirectAttributes redirectAttributes) {
         try {
             scamReportService.deleteScamReport(postId, userDetails);
+            messagingTemplate.convertAndSend("/topic/scamReports", "Report with ID " + postId + " deleted");
             redirectAttributes.addFlashAttribute("message", "Scam report deleted successfully!");
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
