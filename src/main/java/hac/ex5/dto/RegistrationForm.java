@@ -1,21 +1,26 @@
 package hac.ex5.dto;
 
-
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+
+/**
+ * DTO for capturing user registration details with validation rules for each field.
+ */
+
+
 public class RegistrationForm {
 
-    //need to add some pattern etc for usernmae
     @NotBlank(message = "User Name is required")
+
     private String userName;
 
     @NotBlank(message = "First name is required")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "First name is invalid")
     private String firstName;
+
 
     @NotBlank(message = "Last name is required")
     @Pattern(regexp = "^[a-zA-Z]+$", message = "Last name is invalid")
@@ -42,7 +47,12 @@ public class RegistrationForm {
     private String comments;
 
 
-
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
     public String getFirstName() {
         return firstName;
     }

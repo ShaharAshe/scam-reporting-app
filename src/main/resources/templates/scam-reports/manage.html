@@ -6,25 +6,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="/css/mycss.css" rel="stylesheet">
     <link rel="icon" href="/media/icon.png" type="image/x-icon">
-    <title >Registration Success</title>
+    <title>Manage Posts</title>
 </head>
 <body>
 <div class="container-fluid text-center">
     <div th:replace="~{common :: combinedHeader}"></div>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="alert alert-success mt-5" role="alert">
-                <h4 class="alert-heading" >Successfully Registered!</h4>
-                <p >Thank you for registering with us. Your account has been created successfully.</p>
-                <hr>
-                <p class="mb-0" >You can now log in to access your account and start exploring.</p>
+    <div th:replace="~{common :: addPostButton}"></div>
+
+    <!-- scam-reports.html -->
+
+        <div th:each="scamReport : ${scamReports}" class="card mb-3">
+            <div class="card-header">
+                Reported on <span th:text="${#dates.format(scamReport.dateReported, 'yyyy-MM-dd HH:mm')}"></span>
             </div>
-            <div class="d-grid gap-2 col-6 mx-auto my-4">
-                <a th:href="@{/login}" class="btn btn-primary btn-lg" >Log in</a>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${scamReport.title}"></h5>
+                <p class="card-text" th:text="${scamReport.description}"></p>
+                <form th:action="@{/scam-reports/delete/{id}(id=${scamReport.id})}" method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+
             </div>
         </div>
-    </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/javascript/index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

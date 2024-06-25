@@ -4,6 +4,14 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+
+
+
+/**
+ * Entity class for scam reports.
+ * Represents scam reports in the database with relationships, validation constraints, and business logic.
+ */
+
 @Entity
 public class ScamReport {
 
@@ -12,6 +20,8 @@ public class ScamReport {
     private Long id;
 
     private String title;
+    private String url;
+
     private String description;
     private Date dateReported;
 
@@ -20,11 +30,10 @@ public class ScamReport {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // One scam report can have many comments
-    @OneToMany(mappedBy = "scamReport", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Comment> comments;
-
     // Getters and Setters
+    public String getUrl()
+    { return url; }
+    public void setUrl(String url) { this.url = url; }
 
     public Long getId() {
         return id;
@@ -64,13 +73,5 @@ public class ScamReport {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -9,20 +9,62 @@
     <title>Home</title>
 </head>
 <body>
-    <div class="container-fluid text-center">
-        <div th:replace="~{common :: headerNav}"></div>
-        <div class="row text-center">
-            <div class="col text-center">
-                <h1>Welcome!</h1>
+<div class="container-fluid">
+    <div class="mt-3">
+        <p th:if="${visitTime.equals('N/A')}">
+            <span>Hello, this is your first time on the site!</span>
+        </p>
+        <p th:if="${!visitTime.equals('N/A')}">
+            Last Visit Time: <span th:text="${visitTime}"></span>
+        </p>
+    </div>
+    <div th:replace="~{common :: combinedHeader}"></div>
+
+    <div class="text-center mt-4">
+        <div th:replace="common :: centerHeroBox('Welcome to DontScamMe', ${@messageSource.getMessage('home.intro', null, #locale)})"></div>
+        <div class="b-example-divider"></div>
+        <div th:replace="common :: centerHeroBox('Some Statistics', ${@messageSource.getMessage('home.stats', null, #locale)})"></div>
+
+        <div class="row my-4 g-3 justify-content-center">
+            <div class="col-md-4">
+                <div class="card bg-info text-white mb-3">
+                    <div class="card-header">Total Reports</div>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${totalReports}">100</h5>
+                        <p class="card-text">Total number of scam reports.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-success text-white mb-3">
+                    <div class="card-header">Total Users</div>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${totalUsers}">5</h5>
+                        <p class="card-text">Total number of users.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col text-center">
-                <div th:replace="~{posts :: postsList}"></div>
-            </div>
+
+        <div class="b-example-divider"></div>
+
+        <div class="go-register" sec:authorize="!isAuthenticated()">
+        <div  th:replace="common :: centerHeroBox('Register Now to view the feed', ${@messageSource.getMessage('home.goRegister', null, #locale)})"></div>
+        <a th:href="@{/signup}" class="btn btn-primary btn-lg px-4 rounded-pill" role="button">
+            Go to Register!
+        </a>
+    </div>
+
+        <div class="go-register" sec:authorize="isAuthenticated()">
+            <div  th:replace="common :: centerHeroBox('Go to feed now!', ${@messageSource.getMessage('home.goFeed', null, #locale)})"></div>
+            <a th:href="@{scam-reports/feed}" class="btn btn-primary btn-lg px-4 rounded-pill" role="button">
+                Go to Feed!
+            </a>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</div>
+<br/>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

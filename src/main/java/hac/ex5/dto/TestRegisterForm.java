@@ -1,7 +1,16 @@
 package hac.ex5.dto;
 
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+
+/**
+ * DTO for capturing user registration form details specifically for testing purposes with validation rules.
+ */
+
 
 public class TestRegisterForm {
 
@@ -9,9 +18,11 @@ public class TestRegisterForm {
     private String userName;
 
     @NotBlank(message = "First name is required")
+
     private String firstName;
 
     @NotBlank(message = "Last name is required")
+
     private String lastName;
 
     @NotBlank(message = "Email is required")
