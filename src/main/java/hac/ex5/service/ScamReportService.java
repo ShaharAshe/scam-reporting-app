@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Service for managing scam reports.
+ */
 @Service
 public class ScamReportService {
 
@@ -24,16 +26,14 @@ public class ScamReportService {
         this.scamReportRepository = scamReportRepository;
         this.userRepository = userRepository;
     }
-    public List<ScamReport> getFeed(String sort)
-    {
-        List<ScamReport> scamReports;
-        if ("oldest".equals(sort)) {
-            scamReports = scamReportRepository.findAllByOrderByDateReportedAsc();
-        } else {
-            scamReports = scamReportRepository.findAllByOrderByDateReportedDesc();
-        }
 
-        return scamReports;
+    /**
+     * Fetch scam reports sorted by date in ascending or descending order.
+     * @param sort The sort order ("newest" or "oldest").
+     * @return List of sorted scam reports.
+     */
+    public List<ScamReport> getFeed(String sort) {
+        return sort.equals("oldest") ? scamReportRepository.findAllByOrderByDateReportedAsc() : scamReportRepository.findAllByOrderByDateReportedDesc();
     }
     public List<ScamReport> getAllReportsOrdered() {
         return scamReportRepository.findAllByIdNotNullOrderByDateReported();
@@ -42,32 +42,37 @@ public class ScamReportService {
     public List<ScamReport> getUserReports(User user) {
         return scamReportRepository.findAllByUserIdOrderByDateReportedDesc(user.getId());
     }
-
+    /**
+     * Create a new scam report and associate it with the user.
+     * @param scamReport The scam report to create.
+     * @param userDetails The current authenticated user.
+     * @return The saved scam report.
+     */
     public ScamReport createScamReport(ScamReport scamReport, UserDetails userDetails) {
         User user = userRepository.findByUsername(userDetails.getUsername());
         scamReport.setUser(user);
         scamReport.setDateReported(new Date());
         return scamReportRepository.save(scamReport);
     }
-
-    public void deleteScamReport(Long postId, UserDetails userDetails) {
-        ScamReport report = scamReportRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid post ID"));
-        User user = userRepository.findByUsername(userDetails.getUsername());
-
-        if (report.getUser().getId().equals(user.getId())) {
-            scamReportRepository.deleteById(postId);
-        } else if (user.getRole().equals("ADMIN")) {
-            scamReportRepository.deleteById(postId);
-        } else {
-            throw new IllegalArgumentException("You can only delete your own posts!");
-        }
-    }
-
     public List<ScamReport> getScamReportsByIds(List<Long> ids) {
         if (ids == null || ids.isEmpty()) {
             return Collections.emptyList();
         }
         return scamReportRepository.findAllById(ids);
+    }
+    /**
+     * Delete a scam report if the user has appropriate permissions.
+     * @param postId The ID of the scam report to delete.
+     * @param userDetails The current authenticated user.
+     */
+    public void deleteScamReport(Long postId, UserDetails userDetails) {
+        ScamReport report = scamReportRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Invalid post ID"));
+        User user = userRepository.findByUsername(userDetails.getUsername());
+
+        if (report.getUser().equals(user) || "ADMIN".equals(user.getRole())) {
+            scamReportRepository.deleteById(postId);
+        } else {
+            throw new IllegalArgumentException("You can only delete your own posts or as an admin!");
+        }
     }
 }

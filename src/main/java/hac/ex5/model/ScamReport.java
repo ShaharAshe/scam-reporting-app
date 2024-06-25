@@ -4,6 +4,14 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+
+
+
+/**
+ * Entity class for scam reports.
+ * Represents scam reports in the database with relationships, validation constraints, and business logic.
+ */
+
 @Entity
 public class ScamReport {
 

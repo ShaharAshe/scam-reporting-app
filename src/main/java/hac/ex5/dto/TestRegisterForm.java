@@ -6,6 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+
+/**
+ * DTO for capturing user registration form details specifically for testing purposes with validation rules.
+ */
+
+
 public class TestRegisterForm {
 
     @NotBlank(message = "User Name is required")

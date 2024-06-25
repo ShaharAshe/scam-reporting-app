@@ -15,7 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
-
+/**
+ * Security configuration class for Spring Security setup.
+ */
 @Configuration
 public class SecurityConfig {
 
@@ -25,56 +27,56 @@ public class SecurityConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Configures a default user details service that checks for the existence of an admin user and creates one if not present.
+     * This method is run at the start-up of the application to ensure the presence of an administrative user.
+     */
     @Bean
     public void userDetailsService() {
         if (userRepository.findByUsername("admin") == null) {
             hac.ex5.model.User newUser = new hac.ex5.model.User();
             newUser.setUsername("admin");
-            System.out.println("newUser = " + newUser.getUsername());
             newUser.setFirstName("admin");
-            System.out.println("New user created with first name: " + newUser.getFirstName());
             newUser.setLastName("admin");
-            System.out.println("New user created with last name: " + newUser.getLastName());
             newUser.setEmail("admin@admin.com");
-            System.out.println("New user created with email: " + newUser.getEmail());
-            newUser.setPassword(passwordEncoder.encode("admin"));  // Encrypt the password before saving
-            System.out.println("New user created with password: " + newUser.getPassword());
+            newUser.setPassword(passwordEncoder.encode("admin")); // Encrypt the password
             newUser.setRole("ADMIN");
-
-
             userRepository.save(newUser);
-            //ID IS ONLY CREATED AFTER WE .save
-            System.out.println("New user registered with id: {}" + newUser.getId());
         } else {
             System.out.println("Admin user already exists, skipping creation.");
         }
     }
 
-
+    /**
+     * Defines the security filter chain that applies various security configurations.
+     * 
+     * @param http HttpSecurity configuration builder
+     * @return SecurityFilterChain the configured security filter chain
+     * @throws Exception in case of any misconfiguration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-
-                .cors().disable()
-                .csrf().disable()
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/css/**","/media/**", "/", "/403", "/errorpage", "/simulateError", "/signup","/feed", "/").permitAll()
-                        .requestMatchers("/user/**").hasRole("USER")
-                        .requestMatchers("/admin/**","/admin").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/login?error=true")
-                        .permitAll()
-                )
-                .logout(LogoutConfigurer::permitAll)
-                .exceptionHandling(exceptions -> exceptions
-                        .accessDeniedPage("/403")
-                );
+            .cors().disable()
+            .csrf().disable()
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+            .authorizeHttpRequests(requests -> requests
+                .requestMatchers("/css/**", "/media/**", "/", "/403", "/errorpage", "/simulateError", "/signup", "/feed", "/").permitAll()
+                .requestMatchers("/user/**").hasRole("USER")
+                .requestMatchers("/admin/**", "/admin").hasRole("ADMIN")
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error=true")
+                .permitAll()
+            )
+            .logout(LogoutConfigurer::permitAll)
+            .exceptionHandling(exceptions -> exceptions
+                .accessDeniedPage("/403")
+            );
 
         return http.build();
     }

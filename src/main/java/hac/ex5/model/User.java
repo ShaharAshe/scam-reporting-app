@@ -9,6 +9,16 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
+
+
+
+
+
+/**
+ * Entity class for users.
+ * Represents users in the database with relationships, validation constraints, and business logic.
+ */
+
 @Entity
 public class User {
 
