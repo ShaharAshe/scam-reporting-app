@@ -11,9 +11,6 @@ import java.util.Set;
 
 
 
-
-
-
 /**
  * Entity class for users.
  * Represents users in the database with relationships, validation constraints, and business logic.

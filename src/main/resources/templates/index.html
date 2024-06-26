@@ -19,11 +19,11 @@
         </p>
     </div>
     <div th:replace="~{common :: combinedHeader}"></div>
-
+ד
     <div class="text-center mt-4">
-        <div th:replace="common :: centerHeroBox('Welcome to DontScamMe', ${@messageSource.getMessage('home.intro', null, #locale)})"></div>
+        <div th:replace="~{common :: centerHeroBox('Welcome to DontScamMe', ${@messageSource.getMessage('home.intro', null, #locale)})}"></div>
         <div class="b-example-divider"></div>
-        <div th:replace="common :: centerHeroBox('Some Statistics', ${@messageSource.getMessage('home.stats', null, #locale)})"></div>
+        <div th:replace="~{common :: centerHeroBox('Some Statistics', ${@messageSource.getMessage('home.stats', null, #locale)})}"></div>
 
         <div class="row my-4 g-3 justify-content-center">
             <div class="col-md-4">
@@ -49,14 +49,14 @@
         <div class="b-example-divider"></div>
 
         <div class="go-register" sec:authorize="!isAuthenticated()">
-        <div  th:replace="common :: centerHeroBox('Register Now to view the feed', ${@messageSource.getMessage('home.goRegister', null, #locale)})"></div>
+        <div  th:replace="~{common :: centerHeroBox('Register Now to view the feed', ${@messageSource.getMessage('home.goRegister', null, #locale)})}"></div>
         <a th:href="@{/signup}" class="btn btn-primary btn-lg px-4 rounded-pill" role="button">
             Go to Register!
         </a>
     </div>
 
         <div class="go-register" sec:authorize="isAuthenticated()">
-            <div  th:replace="common :: centerHeroBox('Go to feed now!', ${@messageSource.getMessage('home.goFeed', null, #locale)})"></div>
+            <div  th:replace="~{common :: centerHeroBox('Go to feed now!', ${@messageSource.getMessage('home.goFeed', null, #locale)})}"></div>
             <a th:href="@{scam-reports/feed}" class="btn btn-primary btn-lg px-4 rounded-pill" role="button">
                 Go to Feed!
             </a>

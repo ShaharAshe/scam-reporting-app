@@ -56,21 +56,32 @@ public class RegistrationController {
      * @return Redirection to the success page or back to the form if there are errors.
      */
 
-    @PostMapping("/signup")
-    public String handleFormSubmission(@Valid @ModelAttribute("registrationForm") RegistrationForm registrationForm, BindingResult bindingResult, Model model) {
-        boolean hasErrors = userRepository.findByUsername(registrationForm.getUserName()) != null ||
-                            userRepository.findByEmail(registrationForm.getEmail()) != null;
+        @PostMapping("/signup")
+        public String handleFormSubmission(@Valid @ModelAttribute("registrationForm") RegistrationForm registrationForm, BindingResult bindingResult, Model model) {
+            // Check for field-specific errors detected by @Valid
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("genders", GENDERS);
+                return "signup";
+            }
 
-        if (hasErrors) {
-            model.addAttribute("genders", GENDERS);
+            // Check for business logic errors such as duplicate usernames or emails
+            boolean usernameExists = userRepository.findByUsername(registrationForm.getUserName()) != null;
+            boolean emailExists = userRepository.findByEmail(registrationForm.getEmail()) != null;
 
-            model.addAttribute("UserNameError", userRepository.findByUsername(registrationForm.getUserName()) != null);
-            model.addAttribute("EmailError", userRepository.findByEmail(registrationForm.getEmail()) != null);
+            if (usernameExists || emailExists) {
+                if (usernameExists) {
+                    bindingResult.rejectValue("userName", "error.userName", "An account with this username already exists.");
+                }
+                if (emailExists) {
+                    bindingResult.rejectValue("email", "error.email", "An account with this email already exists.");
+                }
+                model.addAttribute("genders", GENDERS);
+                return "signup";
+            }
 
-            return "signup";
+            // Proceed to register the user if no errors
+            userService.registerNewUser(registrationForm);
+            return "redirect:/success";
         }
 
-        userService.registerNewUser(registrationForm);
-        return "success";
-    }
 }
