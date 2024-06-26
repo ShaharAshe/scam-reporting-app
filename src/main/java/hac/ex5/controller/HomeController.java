@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 /**
  * Controller for handling the main homepage and other general routes.
@@ -46,7 +46,9 @@ public class HomeController {
         response.addCookie(cookie);
 
         long totalReports = scamReportRepository.countAllByDateReportedIsTrue();
-        long totalUsers = userRepository.countAllByEmailIsTrueAndRoleContaining("USER");
+        long totalUsers = userRepository.countAllWithEmail();
+        System.out.println(totalUsers);
+        System.out.println(totalReports);
         model.addAttribute("totalReports", totalReports);
         model.addAttribute("totalUsers", totalUsers);
         model.addAttribute("visitTime", visitTime);

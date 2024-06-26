@@ -2,6 +2,7 @@ package hac.ex5.repo;
 
 import hac.ex5.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -25,9 +26,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
     /**
-     * Count all users by their email status and containing a specific role.
-     * @param role The role to check in the users.
+     * Count all users by their email status
+
      * @return count of users.
      */
-    long countAllByEmailIsTrueAndRoleContaining(String role);
+    @Query("SELECT COUNT(u) FROM User u WHERE u.email IS NOT NULL")
+    long countAllWithEmail();
 }
