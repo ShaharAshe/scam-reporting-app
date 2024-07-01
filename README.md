@@ -98,7 +98,6 @@ This project is a web-based application that allows users to report and view sca
 ├── login.html
 ├── signup.html
 ├── success.html
-├── tree_25_6_24
 │
 ├── admin
 │   └── admin.html
