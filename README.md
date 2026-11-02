@@ -7,7 +7,7 @@
 
 Check4Scam is a web application that allows users to share scam information with others. Users can report a scam, view reported scams, so we can prevent scams together. 🚫🕵️‍♂️
 
-# About As
+# About Us
 1. - 💁 Name: Shahar Asher
 - 📫 Email: [shaharas@edu.hac.ac.il](mailto:shaharas@edu.hac.ac.il)
 ---
@@ -25,6 +25,7 @@ Check4Scam is a web application that allows users to share scam information with
 - [Services](#services)
 - [Dto - Data Transfer Object](#dto---data-transfer-object)
 - [Repositories](#repositories)
+- [Models](#models)
 - [Html Files](#html-files)
 
 ## Description
@@ -47,7 +48,7 @@ This project is a web-based application that allows users to report and view sca
 - Bootstrap 🎨
 - JPA (Java Persistence API) 🗄️
 - WebSocket 🔌
-- Xaamp for apache and mysql 🐬
+- XAMPP for apache and mysql 🐬
 - Maven ⚙️
 
 
@@ -101,12 +102,10 @@ This project is a web-based application that allows users to report and view sca
 ├── admin
 │   └── admin.html
 │
-├── scam-reports
-│   ├── common.html
-│   ├── create.html
-│   ├── feed.html
-│   ├── likedPosts.html
-│   └── manage.html
-│
-└── user
+└── scam-reports
+    ├── common.html
+    ├── create.html
+    ├── feed.html
+    ├── likedPosts.html
+    └── manage.html
 ```
