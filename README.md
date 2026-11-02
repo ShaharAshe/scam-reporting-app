@@ -7,12 +7,10 @@
 
 Check4Scam is a web application that allows users to share scam information with others. Users can report a scam, view reported scams, so we can prevent scams together. 🚫🕵️‍♂️
 
-# About Us
-1. - 💁 Name: Shahar Asher
-- 📫 Email: [shaharas@edu.hac.ac.il](mailto:shaharas@edu.hac.ac.il)
----
-2. - 💁 Name: Yaniv Gabay
-- 📫 Email: [yanivga@edu.hac.ac.il](mailto:yanivga@edu.hac.ac.il)
+## About Us
+
+- 💁 **Shahar Asher** · 📫 [shaharas@edu.hac.ac.il](mailto:shaharas@edu.hac.ac.il)
+- 💁 **Yaniv Gabay** · 📫 [yanivga@edu.hac.ac.il](mailto:yanivga@edu.hac.ac.il)
 ---
 
 ## Table of Contents
