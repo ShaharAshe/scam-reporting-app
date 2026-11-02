@@ -1,6 +1,4 @@
 
----
-
 # Check4Scam - Share scam information with others 🔍💬
 
 ## Overview
@@ -11,6 +9,7 @@ Check4Scam is a web application that allows users to share scam information with
 
 - 💁 **Shahar Asher** · 📫 [shaharas@edu.hac.ac.il](mailto:shaharas@edu.hac.ac.il)
 - 💁 **Yaniv Gabay** · 📫 [yanivga@edu.hac.ac.il](mailto:yanivga@edu.hac.ac.il)
+
 ---
 
 ## Table of Contents
